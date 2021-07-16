@@ -11,3 +11,11 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+img{
+  margin-top: 30px;
+}
+
+.hero-image {
+  background-image: url("https://c4.wallpaperflare.com/wallpaper/937/670/402/marvel-dc-hd-super-heroes-silhouette-illustration-wallpaper-preview.jpg"); /* The image used */
+}
