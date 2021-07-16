@@ -1,6 +1,22 @@
 import './App.css';
 import React, {useContext, useReducer, useEffect, useRef,useState,createContext } from 'react';
 
+import firebase from 'firebase/app';
+import 'firebase/auth';
+import 'firebase/analytics';
+
+firebase.initializeApp({
+  apiKey: "AIzaSyCfuEyErF8ehdX7pynxpP4mYck5_kBK1T0",
+  authDomain: "frontend-heros.firebaseapp.com",
+  projectId: "frontend-heros",
+  storageBucket: "frontend-heros.appspot.com",
+  messagingSenderId: "1030341865774",
+  appId: "1:1030341865774:web:ddf0d4e3d70d80a9988abf",
+  measurementId: "G-07QN8P6K9L"
+})
+
+
+
 const HOST_API = "https://app-heroes-of-legends.herokuapp.com";
 const initialState = {
   list:[]
@@ -40,12 +56,51 @@ const Form = () => {
     });
   }
 
-  return<form ref={formRef}>
-  <input type="text" name="nombre" onChange={(event)=>{
-    setState({...state, nombre: event.target.value})
-  }}></input>
-  <button onClick={onAdd}>Agregar</button>
-</form>
+  return (
+    <form ref={formRef}>
+      <input
+        type="text"
+        name="nombre"
+        onChange={(event) => {
+          setState({ ...state, nombre: event.target.value });
+        }}
+      ></input>
+
+      <input
+        type="text"
+        name="raza"
+        onChange={(event) => {
+          setState({ ...state, raza: event.target.value });
+        }}
+      ></input>
+
+      <input
+        type="text"
+        name="habilidad"
+        onChange={(event) => {
+          setState({ ...state, habilidad: event.target.value });
+        }}
+      ></input>
+
+      <input
+        type="text"
+        name="nivelDePoder"
+        onChange={(event) => {
+          setState({ ...state, nivelDePoder: event.target.value });
+        }}
+      ></input>
+
+      <input
+        type="text"
+        name="urlImagen"
+        onChange={(event) => {
+          setState({ ...state, urlImagen: event.target.value });
+        }}
+      ></input>
+
+      <button onClick={onAdd}>Agregar</button>
+    </form>
+  );
 }
 
 const List =() =>{
