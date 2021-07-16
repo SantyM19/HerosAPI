@@ -1,22 +1,6 @@
 import './App.css';
 import React, {useContext, useReducer, useEffect, useRef,useState,createContext } from 'react';
 
-import firebase from 'firebase/app';
-import 'firebase/auth';
-import 'firebase/analytics';
-
-firebase.initializeApp({
-  apiKey: "AIzaSyCfuEyErF8ehdX7pynxpP4mYck5_kBK1T0",
-  authDomain: "frontend-heros.firebaseapp.com",
-  projectId: "frontend-heros",
-  storageBucket: "frontend-heros.appspot.com",
-  messagingSenderId: "1030341865774",
-  appId: "1:1030341865774:web:ddf0d4e3d70d80a9988abf",
-  measurementId: "G-07QN8P6K9L"
-})
-
-
-
 const HOST_API = "https://app-heroes-of-legends.herokuapp.com";
 const initialState = {
   list:[]
