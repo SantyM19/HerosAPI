@@ -1,22 +1,15 @@
 import React, {
   useContext,
-  useReducer,
   useEffect,
-  useRef,
-  useState,
-  createContext,
 } from "react";
-import { useHistory } from 'react-router';
-import axios from "axios";
 import "bootstrap/dist/css/bootstrap.css";
-import { Navbar } from "react-bootstrap";
-import { reducer } from "../Reducer/Reducer";
 import { Store } from "../App";
 
 const HOST_API = "https://app-heroes-of-legends.herokuapp.com";
 export const List = () => {
     const { dispatch, state } = useContext(Store);
   
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     useEffect( async() => {
       fetch(HOST_API + "/heroes", {
         method: "GET",

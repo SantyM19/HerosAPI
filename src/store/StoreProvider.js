@@ -3,8 +3,7 @@ import React, {
   
 } from "react";
 import { reducer } from "../Reducer/Reducer";
-import { Store } from "../App";
-import { initialState } from "../App";
+import { Store, initialState } from "../App";
 
 export const StoreProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
