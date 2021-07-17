@@ -1,10 +1,6 @@
 import React, {
-  useContext,
   useReducer,
-  useEffect,
-  useRef,
-  useState,
-  createContext,
+  
 } from "react";
 import { reducer } from "../Reducer/Reducer";
 import { Store } from "../App";
