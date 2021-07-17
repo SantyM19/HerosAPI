@@ -1,18 +1,28 @@
-import React, { useContext, useRef, useState } from "react";
+
+import React, {
+  useContext,
+  useReducer,
+  useEffect,
+  useRef,
+  useState,
+  createContext,
+} from "react";
+import { useHistory } from 'react-router';
 import axios from "axios";
+import "bootstrap/dist/css/bootstrap.css";
+import { Navbar } from "react-bootstrap";
+import { reducer } from "../Reducer/Reducer";
 import { Store } from "../App";
 
-
 const HOST_API = "https://app-heroes-of-legends.herokuapp.com";
-
-const Form = () => {
+export const Form = () => {
+  const history = useHistory();
   const { dispatch } = useContext(Store);
   const formRef = useRef(null);
   const [state, setState] = useState({});
 
-  const onAdd = (event) => {
+  const onAdd =  (event) => {
     event.preventDefault();
-
     const request = {
       nombre: state.nombre,
       raza: state.raza,
@@ -20,63 +30,34 @@ const Form = () => {
       nivelDePoder: state.nivelDePoder,
       urlImagen: state.urlImagen,
     };
-
-    console.log(request);
-
-    axios
-      .post(HOST_API + "/heroes/crear", request)
-      .then(function (response) {
-        console.log(response);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-      const List = () => {
-        const { dispatch, state } = useContext(Store);
       
-        useEffect(() => {
-          fetch(HOST_API + "/heroes", {
-            method: "GET",
-          })
-            .then((response) => response.json())
-            .then((list) => {
-              dispatch({ type: "update-list", list });
+        
+        if (request.nombre != null && request.raza != null && request.habilidad != null && request.nivelDePoder != null && request.urlImagen != null) {
+          
+      
+           axios
+            .post(HOST_API + "/heroes/crear", request)
+            .then(function (response) {
+              console.log(response);
+            })
+            .catch(function (error) {
+              console.log(error);
             });
-        }, [state.list.length, dispatch]);
-        return (
-          <div className="container flex-column flex-md-row justify-content-center align-items-center h-100 ">
-            <div className="row">
-              {state.list.map((hero) => (
-                <div className="col-md-4">
-                  <div className="tamano-carta card text-center bg-dark animate__animated animate__fadeInUp mx-3 my-3">
-                    <div className="overflow">
-                      <img src={hero.urlImagen} alt="Hero" width="200" height="200"/>
-                    </div>
-                    <div className="card-body text-light">
-                      <h4 className="card-title">{hero.nombre}</h4>
-                      <hr />
-                      <p className="card-text text-white">Raza: {hero.raza}</p>
-                      <p className="card-text text-white">
-                        Habilidad: {hero.habilidad}
-                      </p>
-                      <p className="card-text text-white">
-                        Nivel de poder: {hero.nivelDePoder}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        );
+      
+            alert("Heroe creado")
+            
+        }
+        else {
+            alert("Llenar todos los campos")
+        }
   };
-
+  
   return (
-    <form ref={formRef}>
-      <div className="col-md-5 p-4 mx-auto">
+    <form ref={formRef} >
+      <div className="col-md-5 p-5 mx-auto" >
         <div className="card ">
           <div className="card-header text-center">
-            <h3> Ingresa tu héroe favorito </h3>
+            <h5> Ingresa tu héroe favorito </h5>
           </div>
           <div className="card-body">
             <div className="mb-3">
@@ -109,7 +90,7 @@ const Form = () => {
                 required
                 onChange={(event) => {
                   setState({ ...state, raza: event.target.value });
-                }}
+                }} 
               />
             </div>
             <div className="mb-3">
@@ -126,6 +107,7 @@ const Form = () => {
                 onChange={(event) => {
                   setState({ ...state, habilidad: [event.target.value] });
                 }}
+                
               />
             </div>
             <div className="mb-3">
@@ -141,7 +123,7 @@ const Form = () => {
                 required
                 onChange={(event) => {
                   setState({ ...state, nivelDePoder: event.target.value });
-                }}
+                }}   
               />
             </div>
             <div className="mb-3">
@@ -175,5 +157,3 @@ const Form = () => {
     </form>
   );
 };
-
-export default Form;
